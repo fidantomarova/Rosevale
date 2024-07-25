@@ -1,0 +1,72 @@
+﻿@model List<Message>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <div style="display:flex; justify-content:space-between;align-items:center">
+                        <h5 class="card-title">Messages</h5>
+                    </div>
+
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Subject
+                                </th>
+                                <th>
+                                    Is Replied
+                                </th>
+                                <th style="display:flex; justify-content:end; width:95%">
+                                    Actions
+                                </th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            @foreach (Message message in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @message.Name
+                                    </td>
+                                    <td>
+                                        @message.Email
+                                    </td>
+                                    <td>
+                                        @message.Subject
+                                    </td>
+                                    <td>
+                                        @if (message.IsReplied)
+                                        {
+                                            <span class="text-success">Replied</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">Not Replied</span>
+                                        }
+                                    </td>
+                                    <td style="display:flex; justify-content:end">
+                                        <a asp-action="Details" asp-route-id="@message.Id" class="btn rounded-pill btn-warning" style="color:white;margin-right:10px;display;flex;width:20%">Details</a>
+                                        <a asp-action="SendEmail" asp-route-id="@message.Id" class="btn rounded-pill btn-dark" style="color:white;margin-right:10px;display;flex;width:30%">Send Email</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div> 

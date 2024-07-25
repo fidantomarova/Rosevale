@@ -1,0 +1,63 @@
+﻿@model RegisterVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/login-style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2 class="login-header">Register</h2>
+        <div asp-validation-summary="ModelOnly" style="color:red"></div>
+        <form method="post">
+            <div class="form-group">
+                <input asp-for="@Model.Name" class="form-control" placeholder="Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="@Model.Surname" class="form-control" placeholder="Surname"/>
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="@Model.Username" class="form-control" placeholder="Username"/>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="@Model.Email" class="form-control" placeholder="Email"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="@Model.Password" type="password" class="form-control" placeholder="Password"/>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="@Model.RepeatPassword" type="password" class="form-control" placeholder="Repeat Password"/>
+                <span asp-validation-for="RepeatPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <input asp-for="@Model.IsRemember" class="form-check-input" />
+                <label class="form-check-label" for="RememberMe">Remember Me</label>
+            </div>
+            <button type="submit" class="btn btn-custom btn-block">Register</button>
+        </form>
+        <div class="register-link">
+            <p>Already have an account? <a asp-action="Login" asp-controller="Account">Login now!</a></p>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

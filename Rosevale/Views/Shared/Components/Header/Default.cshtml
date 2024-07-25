@@ -1,0 +1,73 @@
+﻿@model HeaderVM
+<div class="container-fluid bg-dark px-0">
+    <div class="row gx-0">
+        <div class="col-lg-3 bg-dark d-none d-lg-block">
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
+                <h1 class="m-0 text-primary text-uppercase">Rosevale</h1>
+            </a>
+        </div>
+        <div class="col-lg-9">
+            <div class="row gx-0 bg-white d-none d-lg-flex">
+                <div class="col-lg-7 px-5 text-start">
+                    <div class="h-100 d-inline-flex align-items-center py-2 me-4">
+                        <i class="fa fa-envelope text-primary me-2"></i>
+                        <p class="mb-0">@Model.Bios.Email</p>
+                    </div>
+                    <div class="h-100 d-inline-flex align-items-center py-2">
+                        <i class="fa fa-phone-alt text-primary me-2"></i>
+                        <p class="mb-0">@Model.Bios.PhoneNumber</p>
+                    </div>
+                </div>
+                <div class="col-lg-5 px-5 text-end">
+                    <div class="d-inline-flex align-items-center py-2">
+                        @foreach (SocialMedia item in Model.SocialMedias)
+                        {
+                            <a class="me-3" href="@item.Link">@Html.Raw(item.Icon)</a>
+                        }
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand d-block d-lg-none">
+                    <h1 class="m-0 text-primary text-uppercase">Rosevale</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+                    <div class="navbar-nav mr-auto">
+                        <a asp-controller="Home" asp-action="Index" style="margin-left:50px" class="nav-item nav-link">Home</a>
+                        <a asp-controller="Rooms" asp-action="Index" style="margin-left:50px" class="nav-item nav-link">Rooms</a>
+                        <a asp-controller="Reservations" asp-action="Index" style="margin-left:50px" class="nav-item nav-link">Reservation</a>
+                        <a asp-controller="Contact" asp-action="Index" style="margin-left:50px;margin-right:50px" class="nav-item nav-link">Contact</a> 
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Sign in or Register">
+                        @if(User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a id="signin-btn" class="btn btn-primary rounded-0 py-3 px-md-4 d-none d-lg-block" href="/admin/dashboard/index" style="font-size: 14px; padding: 0.3rem 0.75rem; margin: 0.5rem;">@User.Identity.Name</a>
+                                <a id="register-btn" class="btn btn-primary rounded-0 py-3 px-md-4 d-none d-lg-block" asp-controller="Account" asp-action="Logout" style="font-size: 14px; padding: 0.3rem 0.75rem; margin: 0.5rem; display:none;">Logout</a>
+                            }
+                            else if (User.IsInRole("Staff"))
+                            {
+                                <a id="signin-btn" class="btn btn-primary rounded-0 py-3 px-md-4 d-none d-lg-block" href="/admin/dashboard/index" style="font-size: 14px; padding: 0.3rem 0.75rem; margin: 0.5rem;">@User.Identity.Name</a>
+                                <a id="register-btn" class="btn btn-primary rounded-0 py-3 px-md-4 d-none d-lg-block" asp-controller="Account" asp-action="Logout" style="font-size: 14px; padding: 0.3rem 0.75rem; margin: 0.5rem; display:none;">Logout</a>
+                            }
+                            else
+                            {
+                                <a id="signin-btn" class="btn btn-primary rounded-0 py-3 px-md-4 d-none d-lg-block" asp-controller="Home" asp-action="Index" style="font-size: 14px; padding: 0.3rem 0.75rem; margin: 0.5rem;">@User.Identity.Name</a>
+                                <a id="register-btn" class="btn btn-primary rounded-0 py-3 px-md-4 d-none d-lg-block" asp-controller="Account" asp-action="Logout" style="font-size: 14px; padding: 0.3rem 0.75rem; margin: 0.5rem; display:none;">Logout</a>
+                            }
+                        }
+                        else
+                        {
+                            <a id="signin-btn" class="btn btn-primary rounded-0 py-3 px-md-4 d-none d-lg-block" asp-controller="Account" asp-action="Login" style="font-size: 14px; padding: 0.3rem 0.75rem; margin: 0.5rem;">Login</a>
+                            <a id="register-btn" class="btn btn-primary rounded-0 py-3 px-md-4 d-none d-lg-block" asp-controller="Account" asp-action="Register" style="font-size: 14px; padding: 0.3rem 0.75rem; margin: 0.5rem; display:none;">Register</a>
+                        }
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>

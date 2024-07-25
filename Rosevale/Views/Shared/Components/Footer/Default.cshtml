@@ -1,0 +1,36 @@
+﻿@model FooterVM
+<div class="container-fluid bg-dark text-light footer wow fadeIn" data-wow-delay="0.1s" style="margin-top:0px;padding-top:0px">
+    <div class="container pb-5">
+        <div class="row g-5 d-flex justify-content-between">
+            <div class="col-md-6 col-lg-4">
+                <div class="bg-primary rounded p-4">
+                    <a asp-controller="Home" asp-action="Index"><h1 class="text-white text-uppercase mb-3">Rosevale</h1></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <h6 class="section-title text-start text-primary text-uppercase mb-4">Contact</h6>
+                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>@Model.Bios.Address</p>
+                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>@Model.Bios.PhoneNumber</p>
+                <p class="mb-2"><i class="fa fa-envelope me-3"></i>@Model.Bios.Email</p>
+                <div class="d-flex pt-2">
+                    @foreach (SocialMedia item in Model.SocialMedias)
+                    {
+                        <a class="me-3" href="@item.Link">@Html.Raw(item.Icon)</a>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-12">
+                <div class="row gy-5 g-4 d-flex justify-content-end">
+                    <div class="col-md-6">
+                        <h6 class="section-title text-start text-primary text-uppercase mb-4">Hotel</h6>
+                        <a class="btn btn-link" asp-controller="About" asp-action="Index">About Us</a>
+                        <a class="btn btn-link" asp-controller="Contact" asp-action="Index">Contact</a>
+                        <a class="btn btn-link" asp-controller="Rooms" asp-action="Index">Rooms</a>
+                        <a class="btn btn-link" asp-controller="Reservations" asp-action="Index">Reserv now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,85 @@
+﻿@model List<UserVM>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <div style="display:flex; justify-content:space-between;align-items:center">
+                        <h5 class="card-title">Customers</h5>
+                        <a asp-action="Create" class="btn rounded-pill btn-primary" style="color:white;margin-right:10px;display;flex">Create</a>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Fullname
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Username
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Role
+                                </th>
+                                <th style="display:flex; justify-content:end; width:93%">
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (UserVM user in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @user.Name @user.Surname
+                                    </td>
+                                    <td>
+                                        @if (user.IsDeactive)
+                                        {
+                                            <span class="text-danger">Passive</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-success">Active</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @user.Username
+                                    </td>
+                                    <td>
+                                        @user.Email
+                                    </td>
+                                    <td>
+                                        @user.Role
+                                    </td>
+                                    <td style="display:flex; justify-content:end">
+                                        <a asp-action="Edit" asp-route-id="@user.Id" class="btn rounded-pill btn-info" style="color:white;margin-right:10px;display;flex;width:35%">Edit</a>
+                                        <a asp-action="ResetPassword" asp-route-id="@user.Id" class="btn rounded-pill btn-dark" style="color:white;margin-right:10px;display;flex;width:35%">Reset Password</a>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            @if (user.IsDeactive)
+                                            {
+                                                <a asp-action="Activity" asp-route-id="@user.Id" class="btn rounded-pill btn-success" style="color:white;margin-right:10px;display;flex;width:35%">To Active</a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-action="Activity" asp-route-id="@user.Id" class="btn rounded-pill btn-danger" style="color:white;margin-right:10px;display;flex;width:35%">To Deactive</a>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

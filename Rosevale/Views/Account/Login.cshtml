@@ -1,0 +1,54 @@
+﻿@model LoginVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/login-style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2 class="login-header">Login</h2>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form method="post">
+            <div class="form-group">
+                <input asp-for="Username" class="form-control" placeholder="Username or Email" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Password" type="password" class="form-control" placeholder="Password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="row" style="display:flex;justify-content:space-between">
+                <div class="form-group form-check" style="margin-left:15px">
+                    <input asp-for="IsRemember" class="form-check-input" />
+                    <label class="form-check-label" for="IsRemember">Remember Me</label>
+                </div>
+                <div class="forgot-password-link" style="margin-right:15px">
+                    <p><a asp-action="ForgotPassword" asp-controller="Account">Forgot Password?</a></p>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-custom btn-block">Login</button>
+        </form>
+        <div class="register-link">
+            <p>Don't have an account? <a asp-action="Register" asp-controller="Account">Register now!</a></p>
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

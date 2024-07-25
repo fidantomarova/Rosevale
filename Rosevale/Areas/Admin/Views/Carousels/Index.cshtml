@@ -1,0 +1,76 @@
+﻿@model List<Carousel>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <div style="display:flex; justify-content:space-between;align-items:center">
+                        <h5 class="card-title">About</h5>
+                        <a asp-action="Create" class="btn rounded-pill btn-primary" style="color:white;margin-right:10px;display;flex">Create</a>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Image
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Title
+                                </th>
+                                <th style="display:flex; justify-content:end; width:95%">
+                                    Actions
+                                </th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            @foreach (Carousel carousel in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="~/img/@carousel.Image" />
+                                    </td>
+                                    <td>
+                                        @if (carousel.IsDeactive)
+                                        {
+                                            <span class="text-danger">Passive</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-success">Active</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @carousel.Title
+                                    </td>
+                                    <td style="display:flex; justify-content:end">
+
+                                        <a asp-action="Edit" asp-route-id="@carousel.Id" class="btn rounded-pill btn-info" style="color:white;margin-right:10px;display;flex;width:20%">Edit</a>
+                                        <a asp-action="Details" asp-route-id="@carousel.Id" class="btn rounded-pill btn-warning" style="color:white;margin-right:10px;display;flex;width:20%">Details</a>
+                                        @if (carousel.IsDeactive)
+                                        {
+                                            <a asp-action="Activity" asp-route-id="@carousel.Id" class="btn rounded-pill btn-success" style="color:white;margin-right:10px;display;flex;width:20%">To Active</a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="Activity" asp-route-id="@carousel.Id" class="btn rounded-pill btn-danger" style="color:white;margin-right:10px;display;flex;width:20%">To Deactive</a>
+                                        }
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div> 

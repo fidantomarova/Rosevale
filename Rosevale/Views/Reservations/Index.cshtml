@@ -1,0 +1,153 @@
+﻿@model ReservationVM
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/carousel-1.jpg);">
+    <div class="container-fluid page-header-inner py-5">
+        <div class="container text-center pb-5">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Reservation</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center text-uppercase">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Reservation</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Booking Start -->
+<div class="container-xxl py-5" style="margin-bottom:70px">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title text-center text-primary text-uppercase">Room Reservation</h6>
+            <h1 class="mb-5">Reservation A <span class="text-primary text-uppercase">Luxury Room</span></h1>
+        </div>
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <div class="row g-3">
+                    <div class="col-6 text-end">
+                        <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="~/img/@Model.About.Img1" style="margin-top: 25%;">
+                    </div>
+                    <div class="col-6 text-start">
+                        <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s" src="~/img/@Model.About.Img2">
+                    </div>
+                    <div class="col-6 text-end">
+                        <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="~/img/@Model.About.Img3">
+                    </div>
+                    <div class="col-6 text-start">
+                        <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="~/img/@Model.About.Img4">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="wow fadeInUp" data-wow-delay="0.2s">
+                    <form asp-action="Create" asp-controller="Reservations" method="post">
+                        <div class="row g-3">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input asp-for="@Model.Reservation.Name" class="form-control" placeholder="Your Name">
+                                    <label asp-for="@Model.Reservation.Name">Your Name</label>
+                                    <span asp-validation-for="@Model.Reservation.Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input asp-for="@Model.Reservation.Email" class="form-control" placeholder="Your Email">
+                                    <label asp-for="@Model.Reservation.Email">Your Email</label>
+                                    <span asp-validation-for="@Model.Reservation.Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating date" id="date3" data-target-input="nearest">
+                                    <input asp-for="@Model.Reservation.CheckIn" class="form-control datetimepicker-input" placeholder="Check In" data-target="#date3" data-toggle="datetimepicker" />
+                                    <label asp-for="@Model.Reservation.CheckIn">Check In</label>
+                                    <span asp-validation-for="@Model.Reservation.CheckIn" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating date" id="date4" data-target-input="nearest">
+                                    <input asp-for="@Model.Reservation.CheckOut" class="form-control datetimepicker-input" placeholder="Check Out" data-target="#date4" data-toggle="datetimepicker" />
+                                    <label asp-for="@Model.Reservation.CheckOut">Check Out</label>
+                                    <span asp-validation-for="@Model.Reservation.CheckOut" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select asp-for="@Model.Reservation.Adults" class="form-select">
+                                        @for (int i = 1; i <= 4; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                    <label for="select1">Select Adult</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select asp-for="@Model.Reservation.Children" class="form-select">
+                                        @for (int i = 1; i <= 2; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                    <label for="select2">Select Child</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <select asp-for="@Model.Reservation.RoomId" class="form-select" id="roomSelect">
+                                        @foreach (var room in Model.Rooms)
+                                        {
+                                            <option value="@room.Id" data-price="@room.Price">@room.Name</option>
+                                        }
+                                    </select>
+                                    <label asp-for="@Model.Reservation.RoomId">Room</label>
+                                    <span asp-validation-for="@Model.Reservation.RoomId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <label>Price is: $<span id="roomPrice"></span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea asp-for="@Model.Reservation.SpecialRequest" class="form-control" placeholder="Special Request"></textarea>
+                                    <label asp-for="@Model.Reservation.SpecialRequest">Special Request</label>
+                                    <span asp-validation-for="@Model.Reservation.SpecialRequest" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Request Reservation</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Booking End -->
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var roomSelect = document.getElementById('roomSelect');
+            var roomPrice = document.getElementById('roomPrice');
+
+            // Function to update the price based on the selected room
+            function updatePrice() {
+                var selectedOption = roomSelect.options[roomSelect.selectedIndex];
+                roomPrice.textContent = selectedOption.getAttribute('data-price');
+            }
+
+            // Initial price update
+            updatePrice();
+
+            // Update price on change
+            roomSelect.addEventListener('change', updatePrice);
+        });
+    </script>
+}

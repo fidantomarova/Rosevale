@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model Rosevale.ViewModels.DashboardVM
+@using Rosevale.Models
+@inject UserManager<AppUser> UserManager
+@{
+    AppUser user = await UserManager.GetUserAsync(User);
+    var userId = user?.Id;
+}
+<div class="row">
+    <div class="col-md-12 grid-margin">
+        <div class="row">
+            <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                <h3 class="font-weight-bold" style="margin-bottom:30px">Welcome, @user.Name @user.Surname!</h3>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-md-6 grid-margin stretch-card">
+                        <div class="card tale-bg">
+                            <div class="card-people mt-auto">
+                                <img src="~/admin/images/dashboard/people.svg" alt="people">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 grid-margin transparent">
+                        <div class="row">
+                            <div class="col-md-6 mb-4 stretch-card transparent">
+                                <a href="@Url.Action("Index", "Reservations")" class="card card-tale" style="text-decoration: none;padding-bottom:30px">
+                                    <div class="card-body">
+                                        <p class="mb-4">Reservations</p>
+                                        <p class="fs-30 mb-2">@Model.ReservationsCount</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-6 mb-4 stretch-card transparent">
+                                <a href="@Url.Action("Index", "Users")" class="card card-dark-blue" style="text-decoration: none;padding-bottom:30px">
+                                    <div class="card-body">
+                                        <p class="mb-4">Users</p>
+                                        <p class="fs-30 mb-2">@Model.UsersCount</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                                <a href="@Url.Action("Index", "Rooms")" class="card card-light-blue" style="text-decoration: none;padding-bottom:30px">
+                                    <div class="card-body">
+                                        <p class="mb-4">Rooms</p>
+                                        <p class="fs-30 mb-2">@Model.RoomsCount</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-6 stretch-card transparent">
+                                <a href="@Url.Action("Index", "Messages")" class="card card-light-danger" style="text-decoration: none;padding-bottom:30px">
+                                    <div class="card-body">
+                                        <p class="mb-4">Unreplied messages</p>
+                                        <p class="fs-30 mb-2">@Model.UnrepliedMessages</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

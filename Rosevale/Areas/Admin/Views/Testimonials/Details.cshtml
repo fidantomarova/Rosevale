@@ -1,0 +1,43 @@
+﻿@model Testimonial
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Testimonial</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Image
+        </dt>
+        <dd class="col-sm-10">
+            <img src="~/img/@Model.Image" />
+        </dd>
+        <dt class="col-sm-2">
+            Client Name
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ClientName
+        </dd>
+        <dt class="col-sm-2">
+            Profession
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Profession
+        </dd>
+        <dt class="col-sm-2">
+            Description
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Desc
+        </dd>
+    </dl>
+</div>
+<div class="form-group">
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-info btn-rounded btn-fw">Edit</a>
+    <a class="btn btn-secondary btn-rounded btn-fw" asp-action="Index">Back to List</a>
+</div>
+

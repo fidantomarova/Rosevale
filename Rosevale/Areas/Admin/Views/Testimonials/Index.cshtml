@@ -1,0 +1,83 @@
+﻿@model List<Testimonial>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <div style="display:flex; justify-content:space-between;align-items:center">
+                        <h5 class="card-title">Testimonials</h5>
+                        <a asp-action="Create" class="btn rounded-pill btn-primary" style="color:white;margin-right:10px;display;flex">Create</a>
+                    </div>
+
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Image
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Client Name
+                                </th>
+                                <th>
+                                    Profession
+                                </th>
+                                <th style="display:flex; justify-content:end; width:93%">
+                                    Actions
+                                </th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            @foreach (Testimonial testimonial in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="~/img/@testimonial.Image" />
+                                    </td>
+                                    <td>
+                                        @if (testimonial.IsDeactive)
+                                        {
+                                            <span class="text-danger">Passive</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-success">Active</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @testimonial.ClientName
+                                    </td>
+                                    <td>
+                                        @testimonial.Profession
+                                    </td>
+                                    <td style="display:flex; justify-content:end">
+
+                                        <a asp-action="Edit" asp-route-id="@testimonial.Id" class="btn rounded-pill btn-info" style="color:white;margin-right:10px;display;flex;width:20%">Edit</a>
+                                        <a asp-action="Details" asp-route-id="@testimonial.Id" class="btn rounded-pill btn-warning" style="color:white;margin-right:10px;display;flex;width:20%">Details</a>
+                                        @if (testimonial.IsDeactive)
+                                        {
+                                            <a asp-action="Activity" asp-route-id="@testimonial.Id" class="btn rounded-pill btn-success" style="color:white;margin-right:10px;display;flex;width:22%">To Active</a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="Activity" asp-route-id="@testimonial.Id" class="btn rounded-pill btn-danger" style="color:white;margin-right:10px;display;flex;width:22%">To Deactive</a>
+                                        }
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
